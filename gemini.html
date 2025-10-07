@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Nome da Loja] - Devore a Concorrência!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- ESTILOS GERAIS --- */
+        :root {
+            --pacman-yellow: #fef102;
+            --neon-blue: #00ffff;
+            --ghost-red: #ff0000;
+            --ghost-pink: #ff99cc;
+            --ghost-cyan: #00ccff;
+            --ghost-orange: #ffcc33;
+            --bg-color: #00001a;
+            --text-color: #ffffff;
+            --border-style: 3px solid var(--neon-blue);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Press Start 2P', cursive;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 0;
+        }
+        
+        h1, h2, h3 {
+            text-shadow: 2px 2px 0px var(--neon-blue);
+        }
+        
+        a {
+            color: var(--pacman-yellow);
+            text-decoration: none;
+        }
+
+        /* --- ANIMAÇÕES --- */
+        @keyframes blink {
+            0% { opacity: 1; }
+            49% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 0; }
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 10px var(--pacman-yellow), 0 0 20px var(--pacman-yellow); }
+            50% { box-shadow: 0 0 20px var(--pacman-yellow), 0 0 40px var(--pacman-yellow); }
+            100% { box-shadow: 0 0 10px var(--pacman-yellow), 0 0 20px var(--pacman-yellow); }
+        }
+
+        /* --- CABEÇALHO --- */
+        .main-header {
+            border-bottom: var(--border-style);
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+        }
+        .logo .pacman-char {
+            color: var(--pacman-yellow);
+        }
+
+        .main-nav a {
+            margin: 0 15px;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+        .main-nav a:hover {
+            color: var(--neon-blue);
+            text-shadow: 0 0 5px var(--neon-blue);
+        }
+        
+        .header-utils {
+            display: flex;
+            align-items: center;
+        }
+        
+        .search-bar input {
+            background: transparent;
+            border: 2px solid var(--text-color);
+            color: var(--text-color);
+            padding: 8px;
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        .user-icons a {
+            font-size: 24px;
+            margin-left: 20px;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            background-image: url('https://placehold.co/1200x400/00001a/00ffff?text=PC+GAMER+AQUI');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            color: var(--pacman-yellow);
+        }
+        
+        .hero p {
+            font-size: 18px;
+            margin: 20px 0 40px;
+        }
+        
+        .cta-button {
+            background-color: var(--pacman-yellow);
+            color: #000;
+            padding: 15px 30px;
+            font-size: 20px;
+            border: 3px solid #000;
+            box-shadow: 4px 4px 0px var(--text-color);
+            transition: all 0.2s;
+        }
+        
+        .cta-button:hover {
+            background-color: var(--neon-blue);
+            color: var(--text-color);
+            box-shadow: 4px 4px 0px var(--pacman-yellow);
+        }
+        .cta-button span {
+             animation: blink 1s infinite;
+        }
+        
+        /* --- SEÇÕES DE CATEGORIA --- */
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 40px;
+        }
+        
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .category-card {
+            border: var(--border-style);
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .category-card h3 { font-size: 20px; margin-bottom: 15px; }
+        #blinky h3 { color: var(--ghost-red); text-shadow: 2px 2px 0px #fff; }
+        #pinky h3 { color: var(--ghost-pink); text-shadow: 2px 2px 0px #fff; }
+        #inky h3 { color: var(--ghost-cyan); text-shadow: 2px 2px 0px #fff; }
+        #clyde h3 { color: var(--ghost-orange); text-shadow: 2px 2px 0px #fff; }
+        
+        .category-card p { font-size: 12px; margin-bottom: 20px; }
+        .category-card a {
+            display: block;
+            margin-top: 10px;
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .category-card a:hover {
+            background: var(--pacman-yellow);
+            color: #000;
+        }
+        
+        /* --- SEÇÃO POWER-UP --- */
+        .power-up {
+            margin-top: 40px;
+            padding: 40px;
+            text-align: center;
+            border: 3px dashed var(--pacman-yellow);
+            animation: pulse 2s infinite;
+        }
+        .power-up h2 {
+            color: var(--pacman-yellow);
+            font-size: 32px;
+        }
+        .power-up .countdown {
+            font-size: 24px;
+            margin: 20px 0;
+        }
+
+        /* --- RODAPÉ --- */
+        .main-footer {
+            border-top: var(--border-style);
+            padding-top: 40px;
+            margin-top: 40px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        
+        .footer-grid h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: var(--neon-blue);
+        }
+        
+        .footer-grid ul {
+            list-style: none;
+        }
+        
+        .footer-grid ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid var(--neon-blue);
+            font-size: 12px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="logo">
+            <a href="#">[N<span class="pacman-char">O</span>ME DA L<span class="pacman-char">O</span>JA]</a>
+        </div>
+        <nav class="main-nav">
+            <a href="#">👻 PROMOÇÕES</a>
+            <a href="#">👻 PERIFÉRICOS</a>
+            <a href="#">👻 HARDWARE</a>
+            <a href="#">👻 PCs MONTADOS</a>
+        </nav>
+        <div class="header-utils">
+            <div class="search-bar">
+                <input type="text" placeholder="BUSCAR... <INSERT COIN>">
+            </div>
+            <div class="user-icons">
+                <a href="#">🍒</a>
+                <a href="#">🔑</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>DEVORE A CONCORRÊNCIA!</h1>
+        <p>Hardware e Periféricos de Alta Performance para sua Gameplay.</p>
+        <a href="#" class="cta-button">START <span>></span></a>
+    </section>
+
+    <main class="container">
+        <section class="categories">
+            <h2 class="section-title">ESCOLHA SEU FANTASMA</h2>
+            <div class="categories-grid">
+                
+                <article class="category-card" id="blinky">
+                    <h3>👻 Blinky: Perseguindo as Melhores Ofertas!</h3>
+                    <p>Não deixe as promoções escaparem! Blinky te mostra os descontos mais agressivos da nossa loja.</p>
+                    <a href="#">VER PROMOÇÕES</a>
+                </article>
+
+                <article class="category-card" id="pinky">
+                    <h3>👻 Pinky: Prepare sua Emboscada Perfeita.</h3>
+                    <p>A precisão está nos detalhes. Encontre os periféricos ideais para surpreender seus adversários.</p>
+                     <a href="#">TECLADOS E MOUSES</a>
+                     <a href="#">MONITORES</a>
+                </article>
+
+                <article class="category-card" id="inky">
+                    <h3>👻 Inky: Componentes que Mudam o Jogo.</h3>
+                    <p>Versatilidade é a chave. Dê um upgrade no seu PC com os componentes que vão virar o jogo a seu favor.</p>
+                    <a href="#">PLACAS DE VÍDEO</a>
+                    <a href="#">PROCESSADORES</a>
+                </article>
+
+                <article class="category-card" id="clyde">
+                    <h3>👻 Clyde: PCs Prontos para a Ação.</h3>
+                    <p>Para quem não quer perder tempo. Nossos PCs já vêm montados e otimizados, prontos para qualquer desafio.</p>
+                    <a href="#">VER PCs MONTADOS</a>
+                </article>
+
+            </div>
+        </section>
+
+        <section class="power-up">
+            <h2>💡 POWER-UP! OFERTAS INVENCÍVEIS 💡</h2>
+            <p>Aproveite antes que o efeito acabe! Estoque limitado.</p>
+            <div class="countdown">TEMPO RESTANTE: 12:34:56</div>
+            <a href="#" class="cta-button">PEGAR O POWER-UP!</a>
+        </section>
+        
+        <section class="custom-build" style="margin-top: 40px; text-align: center;">
+             <h2 class="section-title">🕹️ MONTE SEU HIGH-SCORE 🕹️</h2>
+             <p>Cansado de builds prontas? Entre no nosso labirinto de peças e monte o PC dos seus sonhos.</p>
+             <a href="#" class="cta-button" style="margin-top: 20px;">CRIAR MEU PC ></a>
+        </section>
+
+    </main>
+
+    <footer class="main-footer container">
+        <div class="footer-grid">
+            <div class="footer-column">
+                <h3>NAVEGAÇÃO</h3>
+                <ul>
+                    <li><a href="#">> Início</a></li>
+                    <li><a href="#">> Promoções</a></li>
+                    <li><a href="#">> Hardware</a></li>
+                    <li><a href="#">> Periféricos</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>SUPORTE</h3>
+                <ul>
+                    <li><a href="#">> Fale Conosco</a></li>
+                    <li><a href="#">> Rastrear Pedido</a></li>
+                    <li><a href="#">> Trocas e Devoluções</a></li>
+                    <li><a href="#">> Perguntas Frequentes</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>SIGA-NOS</h3>
+                <ul>
+                    <li><a href="#">> Instagram</a></li>
+                    <li><a href="#">> YouTube</a></li>
+                    <li><a href="#">> Twitch</a></li>
+                    <li><a href="#">> Twitter / X</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 [Nome da Loja] Informática - GAME OVER para a concorrência.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
