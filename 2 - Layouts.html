@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>1 - Fundamentos</title>
+    <title>2 - Layouts</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
 </head>
+
 <body class="bg-slate-100 text-slate-900">
     <!-- Cabeçalho - Copiar para os outros arquivos -->
     <header class="bg-slate-900 text-white py-10">
@@ -17,7 +19,45 @@
         </div>
     </header>
     <!-- Conteudo Principal em blocos -->
-    <main class="max-w-3xl mx-auto px-6 py-10 space-y-10">    
+    <main class="max-w-3xl mx-auto px-6 py-10 space-y-10">
+        <!-- Objetivo da aula  -->
+        <section class="bg-white rounded-lg shadow p-6 space-y-3">
+            <h2 class="text-2xl font-semibold">Como pensar em layout com Tailwind?</h2>
+            <p>Cada classe ja representa uma instrução de layout. Combine
+                <code>flex</code>, <code>grid</code>,<code>gap</code> e
+                <code>justify-*</code> para controlar posicionamentos sem criar
+                CSS customizados.
+            </p>
+        </section>
+        <!-- Exemplo flex box -->
+        <section class="bg-white rounded-lg shadow p-6 space-y-4">
+            <h2 class="text-2xl font-semibold">Flexbox em ação</h2>
+            <div class="flex flex-wrap gap-4 justify-between items-center bg-sky-100 
+            p-4 rounded-lg">
+                <div class="bg-white px-4 py-2 rounded shadow">Item 1</div>
+                <div class="bg-white px-4 py-2 rounded shadow">Item 2</div>
+                <div class="bg-white px-4 py-2 rounded shadow">Item 3</div>
+                <div class="bg-white px-4 py-2 rounded shadow">Item 4</div>
+            </div>
+            <p>Use flex para ativar o layout flexivel e o flex-wrap para permitir
+                quebra de linha, justify-between para distribuir os itens entre eles.
+            </p>
+        </section>
+        <!-- Grid -->
+        <section class="bg-white rounded-lg shadow p-6 space-y-4">
+            <h2 class="text-2xl font-semibold">Grid em ação</h2>
+            <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                <div class="bg-slate-50 border border-slate-200 p-4 rounded text-center">Coluna 1</div>
+                <div class="bg-slate-50 border border-slate-200  p-4 rounded text-center">Coluna 2</div>
+                <div class="bg-slate-50 border border-slate-200  p-4 rounded text-center">Coluna 3</div>
+                <div class="bg-slate-50 border border-slate-200  p-4 rounded text-center">Coluna 4</div>
+            </div>
+            <p>Combine grid com sm:grid-cols-2 e lg:grid-cols-4 para alterar a quantidade de colunas
+                conforme o tamanho da tela.
+            </p>
+        </section>
+
     </main>
 </body>
+
 </html>

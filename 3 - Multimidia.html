@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3 - Multimidia</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+</head>
+
+<body class="bg-slate-100 text-slate-900">
+    <!-- Cabeçalho - Copiar para os outros arquivos -->
+    <header class="bg-slate-900 text-white py-10">
+        <div class="max-w-3xl mx-auto px-6">
+            <h1 class="text-3xl font-bold mb-4">3 - Multimidia</h1>
+            <p class="text-slate-300">Imagens, Carroseis e outros</p>
+        </div>
+    </header>
+    <!-- Conteudo Principal em blocos -->
+    <main class="max-w-3xl mx-auto px-6 py-10 space-y-10">
+        <!-- Objetivo da aula  -->
+        <section class="bg-white rounded-lg shadow p-6 space-y-3">
+            <h2 class="text-2xl font-semibold">Porque caprichar na midia?</h2>
+            <p>Imagens e videos comunicam muito rapido.</p>
+        </section>
+        <!-- Exemplo flex box -->
+        <section class="bg-white rounded-lg shadow p-6 overflow-hidden">
+            <figure>
+                <img src="https://placehold.co/854x480" alt="Texto Alternativo" class="w-full h-64 object-cover">
+                <figcaption class="p-4 text-sm text-slate-600"> Use o object-cover para preencher o espaco</figcaption>
+            </figure>
+        </section>
+        <!-- imagem em grid -->
+        <section class="bg-white rounded-lg shadow p-6 space-y-4">
+            <h3 class="text-xl font-semibold">Galeria em grid</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="aspect-square bg-purple-100 rounded-lg shadow-inner"></div>
+                <div class="aspect-square bg-purple-100 rounded-lg shadow-inner"></div>
+                <div class="aspect-square bg-purple-100 rounded-lg shadow-inner"></div>
+                <div class="aspect-square bg-purple-100 rounded-lg shadow-inner"></div>
+            </div>
+            <p class="text-sm text-slate-600">A classe aspect-square mantem cada item quadrado;
+                shadow-inner adiciona profundidade sutil.</p>
+        </section>
+
+        <!-- Carrossel controlado por Alpine -->
+        <section x-data="{
+                active: 0,
+                slides: [
+                    { titulo: 'Slide 1', texto: 'Combine snaps com Alpine para alternar conteudos sem plugins.' },
+                    { titulo: 'Slide 2', texto: 'Use botoes anteriores e proximos para navegar por narrativas visuais.' },
+                    { titulo: 'Slide 3', texto: 'Indicadores mostram a posicao atual e permitem saltar entre os cards.' }
+                ],
+                prev() { this.active = (this.active - 1 + this.slides.length) % this.slides.length; },
+                next() { this.active = (this.active + 1) % this.slides.length; }
+            }" class="bg-white rounded-lg shadow p-6 space-y-4">
+            <h3 class="text-xl font-semibold">Carrossel interativo</h3>
+            <div class="relative overflow-hidden rounded-xl border border-purple-200">
+                <template x-for="(slide, index) in slides" :key="index">
+                    <article x-cloak x-show="active === index" x-transition.opacity
+                        class="absolute inset-0 flex flex-col gap-3 px-6 py-8 bg-purple-50 text-slate-700">
+                        <h4 class="text-lg font-semibold text-purple-700" x-text="slide.titulo"></h4>
+                        <p class="text-sm" x-text="slide.texto"></p>
+                    </article>
+                </template>
+                <div class="flex items-center justify-between px-4 py-6 absolute inset-x-0 bottom-0 top-0">
+                    <button type="button" @click="prev"
+                        class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-purple-700 shadow hover:bg-white"
+                        aria-label="Anterior">
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </button>
+                    <button type="button" @click="next"
+                        class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-purple-700 shadow hover:bg-white"
+                        aria-label="Proximo">
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </button>
+                </div>
+                <div class="absolute inset-x-0 bottom-4 flex justify-center gap-2">
+                    <template x-for="(slide, index) in slides" :key="'dot-' + index">
+                        <button type="button" @click="active = index" class="h-2.5 w-2.5 rounded-full transition"
+                            :class="active === index ? 'bg-purple-600' : 'bg-purple-200 hover:bg-purple-300'"
+                            aria-label="Ir para o slide" :aria-current="active === index"></button>
+                    </template>
+                </div>
+                <div class="min-h-[220px]"></div>
+            </div>
+            <p class="text-sm text-slate-600">Alpine controla o estado do carrossel via x-data, @click e x-show; as
+                transicoes utilizam x-transition.opacity.</p>
+        </section>
+
+    </main>
+</body>
+
+</html>
